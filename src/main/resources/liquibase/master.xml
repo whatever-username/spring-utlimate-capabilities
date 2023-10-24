@@ -1,0 +1,71 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="add_survey_table" author="me">
+        <sql>
+            create table survey
+            (
+            id          bigserial not null
+            constraint survey_pk
+            primary key,
+            name        varchar   not null,
+            description varchar,
+            questions   jsonb     not null
+            );
+
+            create unique index survey_id_uindex
+            on survey (id);
+        </sql>
+    </changeSet>
+    <changeSet id="qweqwe" author="me">
+        <sql>
+            INSERT INTO survey (name, description, questions)
+            VALUES ('FOR_NOVICES', null,
+                    '[
+    {
+        "id": "1",
+        "text": "Ваше ФИО:",
+        "type": "TEXT",
+        "options": null,
+        "nextStepRule": {
+            "type": "SIMPLE",
+            "nextStepId": "2"
+        },
+        "storeAnswerAs": null
+    },
+    {
+        "id": "2",
+        "text": "Есть ли у вас опыт в белом таргетинге?",
+        "type": "POLL",
+        "options": [
+            "Да",
+            "Нет"
+        ],
+        "nextStepRule": {
+            "type": "SIMPLE",
+            "nextStepId": "3"
+        },
+        "storeAnswerAs": null
+    },
+    {
+        "id": "3",
+        "text": "Есть ли у вас опыт в белом таргетинге?",
+        "type": "POLL",
+        "options": [
+            "Да",
+            "Нет"
+        ],
+        "nextStepRule": {
+            "type": "SIMPLE",
+            "nextStepId": null
+        },
+        "storeAnswerAs": null
+    }
+]');
+        </sql>
+    </changeSet>
+</databaseChangeLog>
